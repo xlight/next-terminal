@@ -22,7 +22,7 @@ RUN mkdir -p /var/log/supervisor
 COPY --from=builder /app/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 ENV DB sqlite
-ENV SQLITE_FILE 'next-terminal.db'
+ENV SQLITE_FILE 'sqlite/next-terminal.db'
 ENV SERVER_PORT 8088
 ENV SERVER_ADDR 0.0.0.0:$SERVER_PORT
 ENV TIME_ZONE=Asia/Shanghai
@@ -38,5 +38,5 @@ RUN mkfontscale && mkfontdir && fc-cache
 
 EXPOSE $SERVER_PORT
 
-RUN mkdir recording && mkdir drive
+RUN mkdir sqlite && mkdir recording && mkdir drive
 ENTRYPOINT /usr/bin/supervisord
